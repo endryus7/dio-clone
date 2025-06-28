@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../../assets/logo-dio.png';
+import { Link } from 'react-router-dom';
 
 import { Button } from '../Button';
 
@@ -27,18 +28,12 @@ const Header = ({autenticado}) => {
               ) : (
               <>
                 <MenuRight href="/">Home</MenuRight>
-                <Button title="Entrar" />
-                <Button title="Cadastrar" />
-              </>)}
-          </Row>
-          <Row>
-              {autenticado ? (
-                <UserPicture src="https://avatars.githubusercontent.com/u/111534901?s=400&u=3b64018efc7dcf5d68f677085d7bb3880d7e5dae&v=4"/>
-              ) : (
-              <>
-                <MenuRight href="/">Home</MenuRight>
-                <Button title="Entrar" />
-                <Button title="Cadastrar" />
+                <Link to="/login">
+                  <Button title="Entrar"/>
+                </Link>
+                <Link to="/login">
+                  <Button title="Cadastrar"/>
+                </Link>
               </>)}
           </Row>
       </Container>
