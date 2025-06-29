@@ -11,6 +11,8 @@ import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 
+import { api } from '../../services/api'
+
 import { Colum, Container, CriarText, EsqueciText, Row, SubtitleLogin, Title, TitleLogin, Wrapper} from './styles'
 
 const schema = yup.object({
@@ -26,14 +28,24 @@ const Login = () => {
     });
     console.log(isValid, errors);
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = async formData => {
+        try{
+            const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`);
+            
+            if(data.length === 1){
+                navigate('/feed') 
+            } else {
+                alert('Email ou senha inválido')
+            }
+        }catch{
+            //alert('Houve um erro, tente novamente.')
+        }
+    };
 
 
     const navigate = useNavigate();
 
-    const handleClickSignIn = () => {
-        navigate('/feed')
-    }
+  
 
     return (<>
         <Header />
@@ -49,11 +61,11 @@ const Login = () => {
                     <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Input name='email'
-                        errorMessage={errors?.email?.message}
-                        control={control} placeholder="Email"/>
+                            errorMessage={errors?.email?.message}
+                            control={control} placeholder="Email"/>
                         <Input name='password'
-                        errorMessage={errors?.password?.message}
-                        control={control} placeholder="Senha" type="password"/>
+                            errorMessage={errors?.password?.message}
+                            control={control} placeholder="Senha" type="password"/>
                         <Button title="Entrar" variant='secondary'  type="submit"></Button>
                     </form>
                     <Row>
