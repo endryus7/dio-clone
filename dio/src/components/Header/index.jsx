@@ -31,7 +31,7 @@ const Header = ({autenticado}) => {
                 <Link to="/login">
                   <Button title="Entrar"/>
                 </Link>
-                <Link to="/login">
+                <Link to="/cadastro">
                   <Button title="Cadastrar"/>
                 </Link>
               </>)}

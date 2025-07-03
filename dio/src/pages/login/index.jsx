@@ -42,10 +42,7 @@ const Login = () => {
         }
     };
 
-
     const navigate = useNavigate();
-
-  
 
     return (<>
         <Header />
